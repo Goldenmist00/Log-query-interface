@@ -38,6 +38,8 @@
   --sidebar-accent-foreground: oklch(0.25 0.02 255);
   --sidebar-border: oklch(0.88 0.02 255);
   --sidebar-ring: oklch(0.48 0.2 255);
+  --tooltip-bg: #ffffff;
+  --tooltip-border: #e5e7eb;
 }
 
 /* Dark theme: applied when .dark is on root (same primary hue, inverted surfaces) */
@@ -74,6 +76,8 @@
   --sidebar-accent-foreground: oklch(0.95 0 0);
   --sidebar-border: oklch(0.25 0 0);
   --sidebar-ring: oklch(0.55 0.2 255);
+  --tooltip-bg: #374151;
+  --tooltip-border: #4b5563;
 }
 
 @theme inline {

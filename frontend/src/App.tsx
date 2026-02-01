@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { FilterBar, FilterState } from '@/components/FilterBar'
 import { LogResults } from '@/components/LogResults'
+import { AnalyticsDashboard } from '@/components/AnalyticsDashboard'
 import { useLogs } from '@/hooks/useLogs'
-import { Moon, Sun } from 'lucide-react'
+import { Moon, Sun, BarChart3 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const THEME_KEY = 'theme'
@@ -17,8 +18,9 @@ function getIsDark(): boolean {
 }
 
 /**
- * Log Query Interface page: header, filter bar, and log results. Holds filter state and passes it to useLogs and FilterBar.
- * @returns {JSX.Element} Full-page layout with header, FilterBar, and LogResults
+ * Log Query Interface page: header, filter bar, analytics dashboard, and log results. 
+ * Holds filter state and passes it to useLogs and FilterBar.
+ * @returns {JSX.Element} Full-page layout with header, FilterBar, AnalyticsDashboard, and LogResults
  */
 function App() {
   const [filters, setFilters] = useState<FilterState>({
@@ -30,6 +32,7 @@ function App() {
   })
 
   const [isDark, setIsDark] = useState(() => getIsDark())
+  const [showAnalytics, setShowAnalytics] = useState(false)
 
   useEffect(() => {
     const root = document.documentElement
@@ -43,6 +46,7 @@ function App() {
   }, [isDark])
 
   const toggleTheme = () => setIsDark((prev) => !prev)
+  const toggleAnalytics = () => setShowAnalytics((prev) => !prev)
 
   const { logs, loading, error } = useLogs(filters)
 
@@ -65,20 +69,37 @@ function App() {
               <p className="text-xs text-muted-foreground mt-0.5">Search and filter application logs</p>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="shrink-0 h-9 w-9 text-muted-foreground hover:text-foreground"
-            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleAnalytics}
+              className="shrink-0 text-muted-foreground hover:text-foreground"
+              aria-label={showAnalytics ? 'Hide analytics' : 'Show analytics'}
+            >
+              <BarChart3 className="h-4 w-4 mr-2" />
+              {showAnalytics ? 'Hide Analytics' : 'Show Analytics'}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="shrink-0 h-9 w-9 text-muted-foreground hover:text-foreground"
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </Button>
+          </div>
         </div>
       </header>
       <div className="shrink-0 sticky top-0 z-10 bg-background">
         <FilterBar onFiltersChange={setFilters} />
       </div>
+      {showAnalytics && (
+        <div className="shrink-0 p-6 border-b border-border">
+          <AnalyticsDashboard logs={logs} loading={loading} />
+        </div>
+      )}
       <main className="flex-1 min-h-0 overflow-y-auto">
         <LogResults logs={logs} loading={loading} error={error} />
       </main>
