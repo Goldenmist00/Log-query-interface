@@ -1,0 +1,92 @@
+[
+  {
+    "level": "error",
+    "message": "Failed to connect to database.",
+    "resourceId": "server-1234",
+    "timestamp": "2024-01-15T14:32:00.000Z",
+    "traceId": "abc-xyz-001",
+    "spanId": "span-101",
+    "commit": "5e5342f1",
+    "metadata": {
+      "parentResourceId": "server-5678"
+    }
+  },
+  {
+    "level": "warn",
+    "message": "High memory usage detected. Consider scaling.",
+    "resourceId": "server-1234",
+    "timestamp": "2024-01-15T12:20:00.000Z",
+    "traceId": "abc-xyz-002",
+    "spanId": "span-102",
+    "commit": "5e5342f1",
+    "metadata": {}
+  },
+  {
+    "level": "info",
+    "message": "Request processed successfully.",
+    "resourceId": "api-gateway-1",
+    "timestamp": "2024-01-15T10:05:00.000Z",
+    "traceId": "abc-xyz-003",
+    "spanId": "span-103",
+    "commit": "7a8b9c0d",
+    "metadata": {
+      "requestId": "req-456"
+    }
+  },
+  {
+    "level": "debug",
+    "message": "Cache hit for key user:12345",
+    "resourceId": "server-5678",
+    "timestamp": "2024-01-14T18:00:00.000Z",
+    "traceId": "def-uvw-004",
+    "spanId": "span-104",
+    "commit": "7a8b9c0d",
+    "metadata": {}
+  },
+  {
+    "level": "error",
+    "message": "Connection timeout after 30 seconds.",
+    "resourceId": "server-5678",
+    "timestamp": "2024-01-14T16:45:00.000Z",
+    "traceId": "def-uvw-005",
+    "spanId": "span-105",
+    "commit": "5e5342f1",
+    "metadata": {
+      "timeoutMs": 30000
+    }
+  },
+  {
+    "level": "info",
+    "message": "User login successful.",
+    "resourceId": "api-gateway-1",
+    "timestamp": "2024-01-14T09:30:00.000Z",
+    "traceId": "ghi-rst-006",
+    "spanId": "span-106",
+    "commit": "9f0e1d2c",
+    "metadata": {}
+  },
+  {
+    "level": "warn",
+    "message": "Deprecated API endpoint called. Migrate to /v2.",
+    "resourceId": "server-1234",
+    "timestamp": "2024-01-13T20:15:00.000Z",
+    "traceId": "ghi-rst-007",
+    "spanId": "span-107",
+    "commit": "9f0e1d2c",
+    "metadata": {
+      "endpoint": "/v1/users"
+    }
+  },
+  {
+    "level": "debug",
+    "message": "Query executed in 12ms.",
+    "resourceId": "server-5678",
+    "timestamp": "2024-01-13T11:00:00.000Z",
+    "traceId": "jkl-mno-008",
+    "spanId": "span-108",
+    "commit": "5e5342f1",
+    "metadata": {
+      "query": "SELECT * FROM logs"
+    }
+  }
+]
