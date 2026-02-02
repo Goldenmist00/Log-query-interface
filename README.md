@@ -1,6 +1,6 @@
 # Log Ingestion and Querying System
 
-A full-stack application for ingesting, storing, and querying log data with real-time updates. Built with Node.js backend and React frontend, featuring a clean architecture and comprehensive filtering capabilities.
+A full-stack application for ingesting, storing, and querying log data with real-time updates and advanced analytics. Built with Node.js backend and React frontend, featuring a clean architecture, comprehensive filtering capabilities, and interactive data visualization.
 
 ## Overview
 
@@ -9,8 +9,40 @@ This system provides a complete solution for log management with the following c
 - **Log Ingestion**: REST API endpoint for receiving and storing log entries
 - **Advanced Querying**: Filter logs by level, message content, resource ID, timestamp ranges, and trace information
 - **Real-time Updates**: WebSocket integration for live log streaming
+- **Analytics Dashboard**: Interactive charts and metrics for log analysis
 - **Structured Storage**: JSON file-based persistence with efficient querying
-- **Modern UI**: React-based interface with responsive design and dark mode support
+- **Modern UI**: React-based interface with responsive design, dark mode support, and smooth animations
+
+## Features
+
+### Core Functionality
+- **Log Management**: Structured log ingestion with comprehensive validation
+- **Multi-Filter Search**: Filter by level, message, resourceId, timestamp range, traceId, spanId, and commit
+- **Real-time Streaming**: WebSocket-powered live log updates
+- **Chronological Sorting**: Logs displayed in reverse chronological order (newest first)
+
+### Analytics Dashboard
+- **Interactive Metrics Cards**: Total logs, critical errors, warnings, and error rate statistics
+- **Visual Charts**: Bar charts and donut charts with gradient styling and hover effects
+- **Trend Analysis**: Real-time analytics that update with filtered data
+- **Progress Indicators**: Visual progress bars in detailed statistics table
+- **Responsive Design**: Optimized for desktop and mobile viewing
+
+### User Experience
+- **Modern Interface**: Clean, professional design with gradient backgrounds and glass-morphism effects
+- **Dark Mode Support**: Seamless theme switching with system preference detection
+- **Loading States**: Skeleton animations and smooth transitions
+- **Error Handling**: Comprehensive error states with helpful messaging
+- **Color-coded Levels**: Visual distinction for error, warn, info, and debug logs
+- **Smooth Animations**: Performance-optimized transitions and hover effects
+
+### Development Features
+- **Comprehensive Testing**: Unit test coverage with Jest
+- **Environment Configuration**: Flexible config management
+- **Structured Logging**: Custom logger with proper error handling
+- **CORS Support**: Cross-origin request handling
+- **Hot Reload**: Development-friendly setup
+- **TypeScript**: Full type safety throughout the frontend
 
 ## Architecture
 
@@ -33,16 +65,18 @@ The application follows a clean, layered architecture:
 ### Backend
 - **Runtime**: Node.js (v18+)
 - **Framework**: Express.js
-- **WebSocket**: ws library
-- **Testing**: Jest
-- **Storage**: JSON file system
+- **WebSocket**: ws library for real-time communication
+- **Testing**: Jest with comprehensive test coverage
+- **Storage**: JSON file system with efficient read/write operations
 
 ### Frontend
 - **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS v4
-- **UI Components**: Radix UI primitives
-- **Icons**: Lucide React
+- **Build Tool**: Vite for fast development and building
+- **Styling**: Tailwind CSS v4 with custom design system
+- **UI Components**: Radix UI primitives for accessibility
+- **Icons**: Lucide React for consistent iconography
+- **Charts**: Recharts for interactive data visualization
+- **State Management**: React hooks with custom state logic
 
 ## Getting Started
 
@@ -110,6 +144,23 @@ npm run dev
 ```
 
 3. Access the application at `http://localhost:5173`
+
+## Screenshots
+
+### Main Interface
+The application features a modern, clean interface with:
+- Header with theme toggle and analytics dashboard toggle
+- Advanced filter bar with multiple search criteria
+- Real-time log results with color-coded levels
+- Responsive design that works on all screen sizes
+
+### Analytics Dashboard
+Interactive analytics dashboard includes:
+- **Metrics Cards**: Overview of total logs, critical errors, warnings, and error rates
+- **Bar Chart**: Visual representation of log distribution by level
+- **Donut Chart**: Percentage breakdown of log levels
+- **Statistics Table**: Detailed breakdown with progress indicators
+- **Real-time Updates**: Charts update automatically as filters change
 
 ## API Documentation
 
@@ -180,12 +231,20 @@ Query logs with optional filters.
 - Chronological sorting (newest first)
 - Real-time log streaming via WebSocket
 
+### Analytics Dashboard
+- **Interactive Metrics**: Total logs, critical errors, warnings, and error rate cards
+- **Visual Charts**: Bar charts and donut charts with gradient styling
+- **Real-time Analytics**: Charts update automatically with filtered data
+- **Detailed Statistics**: Comprehensive table with progress indicators
+- **Responsive Design**: Optimized for all screen sizes
+
 ### User Interface
-- Clean, modern design with dark mode support
-- Responsive layout for desktop and mobile
-- Advanced filter controls with date/time pickers
+- Clean, modern design with gradient backgrounds
+- Dark mode support with system preference detection
 - Color-coded log levels for easy identification
-- Loading states and error handling
+- Loading states with skeleton animations
+- Smooth transitions and hover effects
+- Glass-morphism design elements
 
 ### Development Features
 - Comprehensive unit test coverage
@@ -193,20 +252,45 @@ Query logs with optional filters.
 - Structured logging with custom logger
 - CORS support for cross-origin requests
 - Hot reload for development
+- TypeScript for type safety
 
 ## Testing
 
-Run the backend test suite:
+### Backend Tests
+Run the comprehensive backend test suite:
 ```bash
 cd backend
 npm test
 ```
 
 The test suite covers:
-- Log validation logic
-- Query filtering functionality
-- Error handling scenarios
-- Service layer integration
+- **Log Validation**: Schema validation, required fields, data types
+- **Query Filtering**: All filter combinations, edge cases, AND logic
+- **Error Handling**: Validation errors, server errors, edge cases
+- **Service Integration**: Complete service layer testing
+
+### Test Coverage
+- 18 comprehensive unit tests
+- Service layer validation and filtering logic
+- Mock database operations
+- Error scenario handling
+
+## Performance Optimizations
+
+The application follows React best practices for optimal performance:
+
+### Frontend Optimizations
+- **Memoized Calculations**: Analytics data computed efficiently with useMemo
+- **Optimized Re-renders**: Strategic use of React hooks to minimize unnecessary updates
+- **Lazy Loading**: Dynamic imports for heavy components
+- **Efficient Charts**: Recharts with optimized rendering and animations
+- **Debounced Search**: Optional debouncing for search inputs (configurable)
+
+### Backend Optimizations
+- **Efficient File I/O**: Optimized JSON file read/write operations
+- **Request Deduplication**: WebSocket connection management
+- **Error Handling**: Comprehensive error catching and meaningful responses
+- **Memory Management**: Efficient data processing and filtering
 
 ## Development
 
@@ -248,29 +332,79 @@ The project maintains high code quality standards:
 │   │   ├── db/             # Database services
 │   │   ├── routes/         # API route definitions
 │   │   ├── services/       # Business logic
+│   │   │   └── __tests__/  # Unit tests
 │   │   ├── utils/          # Utility functions
 │   │   └── ws/             # WebSocket handling
-│   ├── data/               # Log storage
+│   ├── data/               # Log storage (JSON files)
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── components/     # React components
+│   │   │   ├── ui/         # Reusable UI components
+│   │   │   ├── FilterBar.tsx
+│   │   │   ├── LogEntry.tsx
+│   │   │   ├── LogResults.tsx
+│   │   │   └── AnalyticsDashboard.tsx  # New analytics component
 │   │   ├── hooks/          # Custom React hooks
 │   │   └── lib/            # Utility functions
-│   ├── public/             # Static assets
+│   ├── public/             # Static assets and custom favicon
 │   └── package.json
+├── plans/                  # Project planning documents
 └── README.md
 ```
+
+## Recent Updates
+
+### Version 2.0 Features
+- **Analytics Dashboard**: Interactive charts and metrics for log analysis
+- **Enhanced UI**: Modern design with gradients, animations, and glass-morphism effects
+- **Custom Branding**: Replaced generic favicon with custom Log Query Interface icon
+- **Performance Improvements**: Optimized rendering and state management
+- **Better UX**: Improved loading states, error handling, and responsive design
+
+### Analytics Dashboard Features
+- **Metrics Cards**: Real-time statistics with icons and color coding
+- **Interactive Charts**: Bar charts and donut charts with hover effects
+- **Visual Enhancements**: Gradient backgrounds, smooth animations, backdrop blur
+- **Responsive Layout**: Grid-based layout that adapts to screen size
+- **Theme Support**: Full dark/light mode compatibility
 
 ## Contributing
 
 When contributing to this project:
 
-1. Follow the established architecture patterns
+1. Follow the established architecture patterns (Controller → Service → DB Service)
 2. Maintain test coverage for new features
-3. Use TypeScript for type safety
-4. Follow the existing code style and conventions
-5. Update documentation for API changes
+3. Use TypeScript for type safety in frontend components
+4. Follow React best practices for performance optimization
+5. Follow the existing code style and conventions
+6. Update documentation for API or feature changes
+7. Test analytics dashboard with various data sets
+8. Ensure responsive design works across screen sizes
+
+## Browser Support
+
+- **Modern Browsers**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- **Features**: Full support for CSS Grid, Flexbox, CSS Variables, and ES2020
+- **WebSocket**: Native WebSocket support required for real-time features
+- **SVG**: SVG support required for charts and custom favicon
+
+## Deployment Considerations
+
+### Production Checklist
+- [ ] Environment variables configured
+- [ ] CORS origins set for production domains
+- [ ] WebSocket connections properly configured
+- [ ] Static assets optimized and compressed
+- [ ] Analytics dashboard tested with large datasets
+- [ ] Error monitoring and logging configured
+- [ ] Performance monitoring enabled
+
+### Scaling Considerations
+- **Database**: Consider migrating to a proper database for high-volume scenarios
+- **WebSocket**: Implement WebSocket clustering for multiple server instances
+- **Caching**: Add Redis or similar for cross-request caching
+- **CDN**: Serve static assets via CDN for better performance
 
 ## Support
 
