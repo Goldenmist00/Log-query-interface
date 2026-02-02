@@ -88,6 +88,12 @@ export function useLogs(filters: FilterState): UseLogsReturn {
   }, [fetchLogs])
 
   useEffect(() => {
+    // WebSocket is not supported in Vercel serverless deployment
+    // Skip WebSocket connection for production deployment
+    if (apiUrl.includes('vercel.app')) {
+      return
+    }
+
     const wsUrl = getWsUrl(apiUrl)
     const ws = new WebSocket(wsUrl)
 
@@ -100,6 +106,10 @@ export function useLogs(filters: FilterState): UseLogsReturn {
       } catch {
         // ignore invalid JSON
       }
+    }
+
+    ws.onerror = () => {
+      // Silently handle WebSocket errors in production
     }
 
     return () => {
