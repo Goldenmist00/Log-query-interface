@@ -7,6 +7,10 @@
       "config": {
         "distDir": "dist"
       }
+    },
+    {
+      "src": "api/logs.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -19,11 +23,6 @@
       "dest": "/frontend/dist/$1"
     }
   ],
-  "functions": {
-    "api/logs.js": {
-      "maxDuration": 30
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }
